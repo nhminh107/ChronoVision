@@ -79,3 +79,7 @@ logs/
 .DS_Store
 Thumbs.db
 Desktop.ini
+
+# Local IDE settings and workspace state
+.idea/
+.vscode/
