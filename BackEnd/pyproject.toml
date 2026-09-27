@@ -4,14 +4,16 @@ requires = [
     "pybind11>=2.12"
 ]
 build-backend="scikit_build_core.build"
-[project]
-name="ChronoVision"
-version="0.1"
+
 [tool.scikit-build]
 cmake.source-dir = "cpp"
 wheel.packages = [
     "visual_memory"
 ]
+
+[project]
+name="ChronoVision"
+version="0.1"
 dependencies = [
     "dotenv>=0.9.9",
     "pybind11>=3.1.0",

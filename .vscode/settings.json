@@ -1,0 +1,4 @@
+{
+    "git.ignoredRepositories": ["BackEnd"],
+    "git.repositoryScanMaxDepth": 0
+}

@@ -37,6 +37,6 @@ target_compile_features(_video_stream PRIVATE cxx_std_17)
 set_target_properties(_video_stream PROPERTIES CXX_EXTENSIONS OFF)
 
 install(TARGETS _video_stream
-    LIBRARY DESTINATION .
-    RUNTIME DESTINATION .
+    LIBRARY DESTINATION visual_memory
+    RUNTIME DESTINATION visual_memory
 )
