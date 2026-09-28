@@ -1,6 +1,6 @@
 """Pydantic data contracts for database records."""
 
-from datetime import datetime, time
+from datetime import datetime
 from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field
@@ -25,8 +25,8 @@ class EntityContract(BaseModel):
 
     entity_id: str
     class_name: str
-    first_seen: time
-    lass_seen: time
+    first_seen: datetime
+    last_seen: datetime
     attributes: dict[str, Any]
 
 
@@ -37,8 +37,8 @@ class TrackContract(BaseModel):
 
     track_id: str
     entity_id: str
-    start_time: time
-    end_time: time
+    start_time: datetime
+    end_time: datetime
     confidence: float
 
 

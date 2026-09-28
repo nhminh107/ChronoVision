@@ -2,8 +2,7 @@
 
 from sqlalchemy import String, ForeignKey, Float, DateTime, REAL, Text, text
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-from datetime import datetime, time
-from sqlalchemy import Time
+from datetime import datetime
 from sqlalchemy.dialects.postgresql import JSONB
 from typing import Any
 
@@ -26,8 +25,8 @@ class Entity(Base):
     __tablename__ = "entities"
     entity_id: Mapped[str] = mapped_column(primary_key=True)
     class_name: Mapped[str] = mapped_column(String)
-    first_seen: Mapped[time] = mapped_column(Time)
-    lass_seen: Mapped[time] = mapped_column(Time)
+    first_seen: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    last_seen: Mapped[datetime] = mapped_column(DateTime(timezone=True))
     attributes: Mapped[dict[str, Any]] = mapped_column(JSONB)
 
 class Track(Base):
@@ -36,8 +35,8 @@ class Track(Base):
     entity_id: Mapped[str] = mapped_column(
         ForeignKey("entities.entity_id")
     )
-    start_time: Mapped[time] = mapped_column(Time)
-    end_time: Mapped[time] = mapped_column(Time)
+    start_time: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    end_time: Mapped[datetime] = mapped_column(DateTime(timezone=True))
     confidence: Mapped[float] = mapped_column(Float)
 
 
