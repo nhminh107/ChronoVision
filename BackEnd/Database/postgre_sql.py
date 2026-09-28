@@ -1,6 +1,7 @@
 """PostgreSQL persistence and queries returning Pydantic contracts."""
 
 import os
+from datetime import datetime
 from pathlib import Path
 from typing import TypeVar
 
@@ -84,6 +85,20 @@ class Postgre_Manager:
         with self.session_factory() as session:
             record = self._persist(session, Track(**data.model_dump()))
             return TrackContract.model_validate(record)
+
+    def update_track(self, track_id: str, seen_at: datetime) -> None:
+        """Update a track and its entity with the latest observation time."""
+        with self.session_factory.begin() as session:
+            track = session.get(Track, track_id)
+            if track is None:
+                raise ValueError(f"Track not found: {track_id}")
+
+            entity = session.get(Entity, track.entity_id)
+            if entity is None:
+                raise ValueError(f"Entity not found: {track.entity_id}")
+
+            track.end_time = seen_at
+            entity.last_seen = seen_at
 
     def add_event(self, data: EventContract) -> EventContract:
         """Insert an event, applying database defaults to omitted fields."""
