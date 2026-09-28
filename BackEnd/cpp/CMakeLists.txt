@@ -24,16 +24,24 @@ if(NOT PYBIND11_DISCOVERY_RESULT EQUAL 0)
 endif()
 
 find_package(pybind11 CONFIG REQUIRED HINTS "${PYBIND11_CMAKE_DIR}")
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(FFMPEG REQUIRED IMPORTED_TARGET
+    libavformat
+    libavcodec
+    libavutil
+)
 
 pybind11_add_module(_video_stream
     src/bindings.cpp
     src/video_stream_engine.cpp
+    src/ffmpeg_decoder.cpp
 )
 
 target_include_directories(_video_stream PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/include"
 )
 target_compile_features(_video_stream PRIVATE cxx_std_17)
+target_link_libraries(_video_stream PRIVATE PkgConfig::FFMPEG)
 set_target_properties(_video_stream PROPERTIES CXX_EXTENSIONS OFF)
 
 install(TARGETS _video_stream

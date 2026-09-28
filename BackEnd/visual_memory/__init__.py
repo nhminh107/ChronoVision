@@ -1,5 +1,11 @@
-from ._video_stream import VideoStreamEngine
+from .import (
+    VideoStreamEngine,
+    FFmpegDecoder,
+    FrameInfo,
+)
 
 __all__ = [
-    "VideoStreamEngine"
+    "VideoStreamEngine",
+    "FFmpegDecoder",
+    "FrameInfo",
 ]
